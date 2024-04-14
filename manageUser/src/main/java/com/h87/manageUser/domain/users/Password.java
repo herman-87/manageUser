@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @Embeddable
-public class LastName {
-    @Column(name = "c_lastname")
+public class Password {
+    @Column(name = "c_password")
     private String value;
 }
