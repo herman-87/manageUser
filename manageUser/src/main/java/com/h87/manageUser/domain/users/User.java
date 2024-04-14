@@ -3,19 +3,26 @@ package com.h87.manageUser.domain.users;
 import com.h87.manageUser.domain.commons.EmailAddress;
 import com.h87.manageUser.domain.commons.EntityBase;
 import com.h87.manageUser.domain.commons.PhoneNumber;
+import com.h87.manageUser.domain.scopes.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -60,6 +67,15 @@ public class User extends EntityBase implements Principal, UserDetails {
             .isEnabled(new UserEnabled(true))
             .build();
 
+    @Builder.Default
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "t_user_scope",
+            joinColumns = @JoinColumn(name = "c_user"),
+            inverseJoinColumns = @JoinColumn(name = "c_scope")
+    )
+    private List<Role> roles = new ArrayList<>();
+
     @Override
     public String getName() {
         return emailAddress.getValue();
@@ -67,7 +83,9 @@ public class User extends EntityBase implements Principal, UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return this.roles.stream()
+                .map(scope -> new SimpleGrantedAuthority(scope.getName().getValue()))
+                .toList();
     }
 
     @Override

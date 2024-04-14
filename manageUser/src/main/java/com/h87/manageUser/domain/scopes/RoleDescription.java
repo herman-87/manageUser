@@ -4,7 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public class ScopeDescription {
+public class RoleDescription {
     @Column(name = "c_description")
     private String value;
 }
