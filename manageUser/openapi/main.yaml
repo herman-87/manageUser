@@ -1,0 +1,48 @@
+openapi: 3.0.3
+info:
+  title:  Rest API
+  description: All Item Rest API End Points
+  version: 2024-W2
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: Token
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Token
+      summary: Get access Token
+      description: Get access Token
+      operationId: getAccessToken
+      requestBody:
+        description: registration data that need to be use for create employee
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CredentialDTO'
+      responses:
+        201:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenDTO'
+
+components:
+  schemas:
+    CredentialDTO:
+      type: object
+      properties:
+        username:
+          type: string
+          description: employee firstname
+        password:
+          type: string
+          description: employee lastname
+    TokenDTO:
+      type: object
+      properties:
+        accessToken:
+          type: string
