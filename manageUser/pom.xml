@@ -152,12 +152,9 @@
 							<modelPackage>com.manageUser.model</modelPackage>
 							<configOptions>
 								<interfaceOnly>true</interfaceOnly>
-								<dateLibrary>java8</dateLibrary>
-								<delegatePattern>true</delegatePattern>
+								<removeOperationIdPrefix>true</removeOperationIdPrefix>
 								<skipDefaultInterface>true</skipDefaultInterface>
 								<useTags>true</useTags>
-								<useSpringBoot3>true</useSpringBoot3>
-								<library>spring-boot</library>
 							</configOptions>
 						</configuration>
 					</execution>
