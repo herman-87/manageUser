@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title:  Rest API
   description: All Item Rest API End Points
-  version: 2024-W2
+  version: V-2024-04
 servers:
   - url: http://localhost:8080
 tags:
@@ -16,7 +16,7 @@ paths:
       description: Get access Token
       operationId: getAccessToken
       requestBody:
-        description: registration data that need to be use for create employee
+        description: Credentials used to obtain an access token.
         required: true
         content:
           application/json:

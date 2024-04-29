@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-04-29T15:07:47.730735998+01:00[Africa/Douala]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-04-29T16:46:01.748867757+01:00[Africa/Douala]")
 @Validated
 @Tag(name = "Token", description = "the Token API")
 public interface TokenApi {
@@ -42,7 +42,7 @@ public interface TokenApi {
      * POST /auth/login : Get access Token
      * Get access Token
      *
-     * @param credentialDTO registration data that need to be use for create employee (required)
+     * @param credentialDTO Credentials used to obtain an access token. (required)
      * @return successful operation (status code 201)
      */
     @Operation(
@@ -64,7 +64,7 @@ public interface TokenApi {
     )
     
     ResponseEntity<TokenDTO> getAccessToken(
-        @Parameter(name = "CredentialDTO", description = "registration data that need to be use for create employee", required = true) @Valid @RequestBody CredentialDTO credentialDTO
+        @Parameter(name = "CredentialDTO", description = "Credentials used to obtain an access token.", required = true) @Valid @RequestBody CredentialDTO credentialDTO
     );
 
 }

@@ -18,7 +18,7 @@ import javax.annotation.Generated;
  * TokenDTO
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-04-29T15:07:47.730735998+01:00[Africa/Douala]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-04-29T16:46:01.748867757+01:00[Africa/Douala]")
 public class TokenDTO {
 
   private String accessToken;
