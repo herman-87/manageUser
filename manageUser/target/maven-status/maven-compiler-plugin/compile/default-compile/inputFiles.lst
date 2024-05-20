@@ -4,13 +4,12 @@
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/domain/users/CredentialsExpired.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/security/UserDetailsServiceImpl.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/domain/users/FirstName.java
-/home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/target/generated-sources/openapi/src/main/java/com/manageUser/model/TokenDTO.java
-/home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/target/generated-sources/openapi/src/main/java/com/manageUser/api/TokenApi.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/domain/users/Password.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/security/JwtFilter.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/config/BeanConfig.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/domain/users/User.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/domain/commons/EmailAddress.java
+/home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/target/generated-sources/openapi/src/main/java/com/manageUser/model/RegisterUserDTO.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/domain/scopes/RoleName.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/domain/commons/PhoneNumber.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/security/JwtService.java
@@ -24,6 +23,7 @@
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/target/generated-sources/openapi/src/main/java/com/manageUser/api/ApiUtil.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/domain/scopes/Role.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/domain/users/Genre.java
+/home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/target/generated-sources/openapi/src/main/java/com/manageUser/model/GenreDTO.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/repository/RoleSpringRepository.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/domain/users/DateOfBirth.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/domain/tokens/Token.java
@@ -31,6 +31,6 @@
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/domain/users/UserName.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/service/AuthenticationService.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/domain/scopes/RoleDescription.java
-/home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/target/generated-sources/openapi/src/main/java/com/manageUser/model/CredentialDTO.java
+/home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/target/generated-sources/openapi/src/main/java/com/manageUser/api/UserApi.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/domain/tokens/TokenExpiredDate.java
 /home/essoungou_wonga/H87/back end/tutorial/spring security/manageUser/src/main/java/com/h87/manageUser/repository/TokenSpringRepository.java

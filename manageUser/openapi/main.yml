@@ -6,43 +6,71 @@ info:
 servers:
   - url: http://localhost:8080
 tags:
-  - name: Token
+  - name: User
 paths:
-  /auth/login:
+  /user/register:
     post:
       tags:
-        - Token
-      summary: Get access Token
-      description: Get access Token
-      operationId: getAccessToken
+        - User
+      summary: registration of a new user
+      description: registration of a new user
+      operationId: registerUser
       requestBody:
-        description: Credentials used to obtain an access token.
+        description: User data to create
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CredentialDTO'
+              $ref: '#/components/schemas/RegisterUserDTO'
       responses:
         201:
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TokenDTO'
+                type: string
+                format: uuid
 
 components:
   schemas:
-    CredentialDTO:
+    RegisterUserDTO:
+      required:
+        - emailAddress
+        - password
+        - countryCode
+        - number
+        - firstName
+        - lastName
+        - genre
       type: object
       properties:
-        username:
+        emailAddress:
           type: string
-          description: employee firstname
+          description: user email
         password:
           type: string
-          description: employee lastname
-    TokenDTO:
-      type: object
-      properties:
-        accessToken:
+          description: user password
+        countryCode:
           type: string
+          description: country code
+          example: 237 for Cameroon country
+        number:
+          type: string
+          description: phone number
+          example: 677891234
+        firstName:
+          type: string
+          description: User first name
+        lastName:
+          type: string
+          description: User last name
+        dateOfBirth:
+          type: string
+          format: date
+        genre:
+          $ref: '#/components/schemas/GenreDTO'
+    GenreDTO:
+      type: string
+      enum:
+        - MALE
+        - FEMALE

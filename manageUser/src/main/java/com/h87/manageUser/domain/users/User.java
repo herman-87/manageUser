@@ -3,7 +3,9 @@ package com.h87.manageUser.domain.users;
 import com.h87.manageUser.domain.commons.EmailAddress;
 import com.h87.manageUser.domain.commons.EntityBase;
 import com.h87.manageUser.domain.commons.PhoneNumber;
-import com.h87.manageUser.domain.scopes.Role;
+import com.h87.manageUser.domain.roles.Role;
+import com.h87.manageUser.domain.roles.RoleRepository;
+import com.h87.manageUser.utils.RegisterUserData;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -16,16 +18,19 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -75,6 +80,10 @@ public class User extends EntityBase implements Principal, UserDetails {
             inverseJoinColumns = @JoinColumn(name = "c_scope")
     )
     private List<Role> roles = new ArrayList<>();
+
+    public static User createUser(RegisterUserData registerUserData, PasswordEncoder passwordEncoder, RoleRepository roleRepository, UserRepository userRepository) {
+        return null;
+    }
 
     @Override
     public String getName() {

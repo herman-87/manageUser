@@ -2,6 +2,6 @@
 README.md
 pom.xml
 src/main/java/com/manageUser/api/ApiUtil.java
-src/main/java/com/manageUser/api/TokenApi.java
-src/main/java/com/manageUser/model/CredentialDTO.java
-src/main/java/com/manageUser/model/TokenDTO.java
+src/main/java/com/manageUser/api/UserApi.java
+src/main/java/com/manageUser/model/GenreDTO.java
+src/main/java/com/manageUser/model/RegisterUserDTO.java

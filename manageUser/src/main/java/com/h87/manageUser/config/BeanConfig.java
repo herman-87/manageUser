@@ -1,5 +1,11 @@
 package com.h87.manageUser.config;
 
+import com.h87.manageUser.domain.roles.RoleRepository;
+import com.h87.manageUser.domain.users.UserRepository;
+import com.h87.manageUser.repository.RoleSpringRepository;
+import com.h87.manageUser.repository.UserSpringRepository;
+import com.h87.manageUser.service.DefaultRoleRepository;
+import com.h87.manageUser.service.DefaultUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,5 +32,15 @@ public class BeanConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public RoleRepository roleRepository(RoleSpringRepository roleSpringRepository) {
+        return new DefaultRoleRepository(roleSpringRepository);
+    }
+
+    @Bean
+    public UserRepository userRepository(UserSpringRepository userSpringRepository) {
+        return new DefaultUserRepository(userSpringRepository);
     }
 }
