@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        h1{
+            font-size: 40px;
+            font-family: "Droid Sans",serif;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            height: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 40%;
+            padding: 10px;
+        }
+        .activation-link{
+            display: flex;
+            align-items: center;
+            width: 150px;
+            height: 30px;
+            padding: 5px;
+            background-color: blue;
+            color: white;
+            border-radius: 5px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Account Activation</h1>
+    <p class="greeting" th:text="'Hello ' + ${username} +','"></p>
+    <p>Thank you for signing up! Please use the following activation code to activate your account:</p>
+    <div class="activation-code"><span th:text="${activationCode}"></span></div>
+    <div class="activation-link">
+        <a th:href="${confirmationUrl}" target="_blank">Activate your Account</a>
+    </div>
+</div>
+</body>
+</html>

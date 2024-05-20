@@ -7,8 +7,10 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
@@ -23,10 +25,10 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class EmailService {
     private final JavaMailSender mailSender;
-    private final SpringTemplateEngine springTemplateEngine;
+    private final SpringTemplateEngine templateEngine;
+    private final String activationCodeEmailAddressSender;
 
-    //Something to be added
-
+    @Async
     public void sendEmail(
             String to,
             String userName,
@@ -49,7 +51,16 @@ public class EmailService {
             properties.put("activationCode", activationCode);
 
             Context context = new Context();
+            context.setVariables(properties);
 
+            mimeMessageHelper.setFrom(activationCodeEmailAddressSender);
+            mimeMessageHelper.setTo(to);
+            mimeMessageHelper.setSubject(subject);
+
+            String template = templateEngine.process(templateName, context);
+
+            mimeMessageHelper.setText(template, true);
+            mailSender.send(mimeMessage);
         } catch (MessagingException e) {
             log.warn("Failed to send email to {}", userName);
             e.printStackTrace();
