@@ -173,4 +173,8 @@ public class User extends EntityBase implements Principal, UserDetails {
                 .build();
         return tokenRepository.save(generatedToken);
     }
+
+    public String getFullName() {
+        return firstName.getValue().concat( " ").concat(lastName.getValue());
+    }
 }

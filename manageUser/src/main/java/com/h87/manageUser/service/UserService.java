@@ -1,5 +1,6 @@
 package com.h87.manageUser.service;
 
+import com.h87.manageUser.domain.EmailTemplateName;
 import com.h87.manageUser.domain.roles.RoleRepository;
 import com.h87.manageUser.domain.tokens.Token;
 import com.h87.manageUser.domain.tokens.TokenRepository;
@@ -14,6 +15,7 @@ import com.manageUser.model.RegisterUserDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +35,8 @@ public class UserService {
     private final Integer activationCodeExpirationMinutes;
     private final TokenRepository tokenRepository;
     private final EmailService emailService;
+    @Value("${application.mailing.frontend.activate-url}")
+    private String activationUrl;
 
 
     @SneakyThrows
@@ -52,11 +56,19 @@ public class UserService {
         }
         String activationCode = User.generateActivationCode(activationCodeLength, activationCodeCharacters);
         Token generatedToken = createdUser.generatedToken(activationCode, activationCodeExpirationMinutes, tokenRepository);
-        sendValidationEmail(generatedToken);
+        sendValidationEmail(createdUser, generatedToken);
         return createdUser.getId();
     }
 
-    private void sendValidationEmail(Token token) {
-        // send email
+    @SneakyThrows
+    private void sendValidationEmail(User createdUser, Token token) {
+        emailService.sendEmail(
+                createdUser.getEmailAddress().getValue(),
+                createdUser.getFullName(),
+                EmailTemplateName.ACTIVATE_ACCOUNT,
+                activationUrl,
+                token.getValue().getValue(),
+                "Account Activation"
+        );
     }
 }

@@ -31,7 +31,7 @@ public class EmailService {
     @Async
     public void sendEmail(
             String to,
-            String userName,
+            String userFullName,
             EmailTemplateName emailTemplate,
             String confirmationUrl,
             String activationCode,
@@ -46,7 +46,7 @@ public class EmailService {
                     StandardCharsets.UTF_8.name()
             );
             Map<String, Object> properties = new HashMap<>();
-            properties.put("username", userName);
+            properties.put("userFullName", userFullName);
             properties.put("confirmationUrl", confirmationUrl);
             properties.put("activationCode", activationCode);
 
@@ -62,7 +62,7 @@ public class EmailService {
             mimeMessageHelper.setText(template, true);
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
-            log.warn("Failed to send email to {}", userName);
+            log.warn("Failed to send email to {}", userFullName);
             e.printStackTrace();
             throw new InternalServerError(ManageUserErrorCode.EMAIL_SEND_ERROR);
         }
