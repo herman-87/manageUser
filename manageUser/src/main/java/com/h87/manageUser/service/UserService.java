@@ -1,7 +1,9 @@
 package com.h87.manageUser.service;
 
-import com.h87.manageUser.domain.commons.EntityBase;
 import com.h87.manageUser.domain.roles.RoleRepository;
+import com.h87.manageUser.domain.tokens.Token;
+import com.h87.manageUser.domain.tokens.TokenRepository;
+import com.h87.manageUser.domain.users.RoleNotFoundException;
 import com.h87.manageUser.domain.users.User;
 import com.h87.manageUser.domain.users.UserRepository;
 import com.h87.manageUser.exception.InternalServerError;
@@ -16,7 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -27,19 +28,35 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final Integer activationCodeLength;
+    private final String activationCodeCharacters;
+    private final Integer activationCodeExpirationMinutes;
+    private final TokenRepository tokenRepository;
+    private final EmailService emailService;
+
 
     @SneakyThrows
     @Transactional
     public UUID createUser(RegisterUserDTO registerUserDTO) {
         RegisterUserData registerUserData = userMapper.fromRegisterUserDTOToRegisterUserData(registerUserDTO);
-        User createdUser = User.createUser(
-                registerUserData,
-                passwordEncoder,
-                roleRepository,
-                userRepository
-        );
-        return Optional.ofNullable(createdUser)
-                .map(EntityBase::getId)
-                .orElseThrow(() -> new InternalServerError(ManageUserErrorCode.INTERNAL_SERVER_ERROR));
+        User createdUser;
+        try {
+            createdUser = User.createUser(
+                    registerUserData,
+                    passwordEncoder,
+                    roleRepository,
+                    userRepository
+            );
+        } catch (RoleNotFoundException e) {
+            throw new InternalServerError(ManageUserErrorCode.ROLE_NOT_FOUND);
+        }
+        String activationCode = User.generateActivationCode(activationCodeLength, activationCodeCharacters);
+        Token generatedToken = createdUser.generatedToken(activationCode, activationCodeExpirationMinutes, tokenRepository);
+        sendValidationEmail(generatedToken);
+        return createdUser.getId();
+    }
+
+    private void sendValidationEmail(Token token) {
+        // send email
     }
 }
