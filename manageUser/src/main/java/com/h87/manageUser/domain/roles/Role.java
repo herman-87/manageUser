@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "t_scope")
+@Table(name = "t_role")
 public class Role extends EntityBase {
     @Embedded
     private RoleName name;

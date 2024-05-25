@@ -84,9 +84,9 @@ public class User extends EntityBase implements Principal, UserDetails {
     @Builder.Default
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "t_user_scope",
+            name = "t_user_role",
             joinColumns = @JoinColumn(name = "c_user"),
-            inverseJoinColumns = @JoinColumn(name = "c_scope")
+            inverseJoinColumns = @JoinColumn(name = "c_role")
     )
     private List<Role> roles = new ArrayList<>();
 
