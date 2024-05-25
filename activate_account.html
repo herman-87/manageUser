@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Account Activation</h1>
+    <p class="greeting" th:text="'Hello ' + ${username} +','"></p>
+    <p>Thank you for signing up! Please use the following activation code to activate your account:</p>
+    <div class="activation-code"><span th:text="${activationCode}"></span></div>
+    <div class="activation-link">
+        <a th:href="${confirmationUrl}" target="_blank">Activate your Account</a>
+    </div>
+</div>
+</body>
+</html>
