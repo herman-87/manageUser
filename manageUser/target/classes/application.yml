@@ -10,3 +10,10 @@ springdoc:
 server:
   servlet:
     context-path: /api/v1
+
+default:
+  activation-code:
+    length: 6
+    expiration-minutes: 15
+    characters: 0123456789
+    email-address-sender: hermanessoungou@gmail.com

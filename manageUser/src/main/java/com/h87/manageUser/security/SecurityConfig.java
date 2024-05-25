@@ -31,7 +31,7 @@ public class SecurityConfig {
                         authorizationManagerRequestMatcherRegistry ->
                                 authorizationManagerRequestMatcherRegistry
                                         .requestMatchers(
-                                                ""
+                                                "*"
                                         )
                                         .permitAll()
                                         .anyRequest()

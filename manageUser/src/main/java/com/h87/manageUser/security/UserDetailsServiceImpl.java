@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userSpringRepository
-                .findByEmailValue(username)
+                .findByEmailAddressValue(username)
                 .orElseThrow(() -> new ResourcesNotFoundException(USER_NOT_FOUND));
     }
 }

@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 @Embeddable
 public class TokenValue {
     @Column(name = "c_value")
-    private String value;
+    private String token;
 }

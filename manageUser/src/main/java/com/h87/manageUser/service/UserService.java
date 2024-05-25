@@ -67,7 +67,7 @@ public class UserService {
                 createdUser.getFullName(),
                 EmailTemplateName.ACTIVATE_ACCOUNT,
                 activationUrl,
-                token.getValue().getValue(),
+                token.getValue().getToken(),
                 "Account Activation"
         );
     }

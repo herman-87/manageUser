@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,13 +27,13 @@ public class BeanConfig {
 
     private final UserDetailsService userDetailsService;
     @Value("${default.activation-code.length}")
-    private final Integer activationCodeLength;
+    private Integer activationCodeLength;
     @Value("${default.activation-code.expiration-minutes}")
-    private final Integer activationCodeExpirationMinutes;
+    private Integer activationCodeExpirationMinutes;
     @Value("${default.activation-code.characters}")
-    private final String activationCodeCharacters;
+    private String activationCodeCharacters;
     @Value("${default.activation-code.email-address-sender}")
-    private final String activationCodeEmailAddressSender;
+    private String activationCodeEmailAddressSender;
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
@@ -49,7 +50,8 @@ public class BeanConfig {
 
     @Bean
     public JavaMailSender mailSender() {
-        return null;
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        return mailSender;
     }
 
     //Domain Repositories
