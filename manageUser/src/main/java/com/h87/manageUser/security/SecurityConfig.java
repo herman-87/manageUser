@@ -1,8 +1,10 @@
 package com.h87.manageUser.security;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -23,6 +25,26 @@ public class SecurityConfig {
     private final AuthenticationProvider authenticationProvider;
 
     @Bean
+    @Order(0)
+    public SecurityFilterChain healthEndpoints(HttpSecurity http) throws Exception {
+        return http
+                .securityMatcher("/actuator/health/**", "/actuator/swagger-ui")
+                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+                .build();
+    }
+
+    @Bean
+    @Order(1)
+    public SecurityFilterChain publicEndpoints(HttpSecurity http) throws Exception {
+        return http
+                .securityMatcher("/user/register")
+                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+                .build();
+    }
+
+    @Order(2)
+    @ConditionalOnProperty(name = "spring.security.enabled", havingValue = "true", matchIfMissing = true)
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .cors(Customizer.withDefaults())
@@ -31,7 +53,7 @@ public class SecurityConfig {
                         authorizationManagerRequestMatcherRegistry ->
                                 authorizationManagerRequestMatcherRegistry
                                         .requestMatchers(
-                                                "*"
+                                                "/*"
                                         )
                                         .permitAll()
                                         .anyRequest()
@@ -44,6 +66,19 @@ public class SecurityConfig {
                 )
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
+    }
+
+    @ConditionalOnProperty(name = "spring.security.enabled", havingValue = "false")
+    @Bean
+    public SecurityFilterChain disabledSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
+                        authorizationManagerRequestMatcherRegistry
+                                .anyRequest()
+                                .permitAll()
+                )
                 .build();
     }
 }
